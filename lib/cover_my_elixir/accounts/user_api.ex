@@ -5,7 +5,7 @@ defmodule CoverMyElixir.Accounts.UserApi do
     with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <-
            HTTPoison.get("#{url}/users"),
          {:ok, users} <- Poison.decode(body) do
-      users
+      {:ok, users}
     else
       error -> {:error, {"Something went wrong", error}}
     end

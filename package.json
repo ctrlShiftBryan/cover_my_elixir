@@ -1,0 +1,14 @@
+{
+  "name": "cover_my_elixir",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ctrlShiftBryan/cover_my_elixir.git",
+  "author": "Bryan Arendt <barendt@covermymeds.com>",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.12.2"
+  },
+  "scripts": {
+    "start": "json-server --watch db.json"
+  }
+}

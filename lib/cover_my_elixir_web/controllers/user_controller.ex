@@ -5,8 +5,9 @@ defmodule CoverMyElixirWeb.UserController do
   alias CoverMyElixir.Accounts.User
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    with {:ok, users} <- Accounts.list_users() do
+      render(conn, "index.html", users: users)
+    end
   end
 
   def new(conn, _params) do
@@ -20,6 +21,7 @@ defmodule CoverMyElixirWeb.UserController do
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -44,6 +46,7 @@ defmodule CoverMyElixirWeb.UserController do
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end

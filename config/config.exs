@@ -7,7 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :cover_my_elixir,
-  apis: [jsonplaceholder: "https://jsonplaceholder.typicode.com"],
+  apis: [jsonplaceholder: "http://localhost:3000"],
   ecto_repos: [CoverMyElixir.Repo]
 
 # Configures the endpoint

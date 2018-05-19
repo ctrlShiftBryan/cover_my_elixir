@@ -19,7 +19,9 @@ defmodule CoverMyElixir.Accounts do
 
   """
   def list_users do
-    UserApi.all()
+    with {:ok, users} <- UserApi.all() do
+      {:ok, users |> Enum.map(&%{"phone" => &1["phone"], "name" => &1["name"]})}
+    end
   end
 
   @doc """
