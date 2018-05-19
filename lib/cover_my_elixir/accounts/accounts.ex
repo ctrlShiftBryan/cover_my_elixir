@@ -7,6 +7,7 @@ defmodule CoverMyElixir.Accounts do
   alias CoverMyElixir.Repo
 
   alias CoverMyElixir.Accounts.User
+  alias CoverMyElixir.Accounts.UserApi
 
   @doc """
   Returns the list of users.
@@ -18,7 +19,7 @@ defmodule CoverMyElixir.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    UserApi.all()
   end
 
   @doc """
