@@ -1,6 +1,11 @@
 defmodule CoverMyElixir.Tests.Accounts.UserApi do
   use ExUnit.Case
 
+  setup do
+    bypass = Bypass.open(port: 3001)
+    {:ok, bypass: bypass}
+  end
+
   @response {:ok,
              [
                %{
@@ -205,7 +210,15 @@ defmodule CoverMyElixir.Tests.Accounts.UserApi do
                }
              ]}
 
-  test "can call the api" do
+  test "can call the api", %{bypass: bypass} do
+    Bypass.expect(bypass, fn conn ->
+      assert "/users" == conn.request_path
+      assert "GET" == conn.method
+
+      {:ok, users} = @response
+      Plug.Conn.resp(conn, 200, users |> Poison.encode!())
+    end)
+
     assert CoverMyElixir.Accounts.UserApi.all() == @response
   end
 end

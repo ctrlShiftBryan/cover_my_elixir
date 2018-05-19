@@ -54,3 +54,10 @@ Brandon
 https://github.com/daveshah/stubby
 Dave Shah
 1
+
+--- show stars on github for each in the couple hunders,
+--- then show mystery 12,933 stars without showing package
+--- what if we could use somehing with all the starts?
+--- slide over to elixir-lang/elixir
+--- lets just use elixir and no external library
+--- the key is DI -lets take a quick detour
