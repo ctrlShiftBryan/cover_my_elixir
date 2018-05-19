@@ -42,7 +42,8 @@ defmodule CoverMyElixir.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 1.0"},
-      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
+      {:exvcr, "~> 0.10", only: :test}
     ]
   end
 

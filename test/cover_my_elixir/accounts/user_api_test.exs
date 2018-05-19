@@ -1,5 +1,12 @@
 defmodule CoverMyElixir.Tests.Accounts.UserApi do
   use ExUnit.Case
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
+  setup do
+    HTTPoison.start()
+    ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
+    :ok
+  end
 
   @response {:ok,
              [
@@ -206,6 +213,8 @@ defmodule CoverMyElixir.Tests.Accounts.UserApi do
              ]}
 
   test "can call the api" do
-    assert CoverMyElixir.Accounts.UserApi.all() == @response
+    use_cassette "httpoison_get" do
+      assert CoverMyElixir.Accounts.UserApi.all() == @response
+    end
   end
 end
