@@ -1,5 +1,6 @@
 defmodule CoverMyElixir.Tests.Accounts.UserApi do
   use ExUnit.Case
+  import Mock
 
   @response {:ok,
              [
@@ -206,6 +207,11 @@ defmodule CoverMyElixir.Tests.Accounts.UserApi do
              ]}
 
   test "can call the api" do
-    assert CoverMyElixir.Accounts.UserApi.all() == @response
+    {:ok, users} = @response
+    mock_response = {:ok, %HTTPoison.Response{status_code: 200, body: users |> Poison.encode!()}}
+
+    with_mock HTTPoison, get: fn _url -> mock_response end do
+      assert CoverMyElixir.Accounts.UserApi.all() == @response
+    end
   end
 end
