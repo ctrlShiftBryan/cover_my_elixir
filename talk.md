@@ -54,3 +54,7 @@ Brandon
 https://github.com/daveshah/stubby
 Dave Shah
 1
+
+# Outline
+
+Testing Elixir Api Calls
