@@ -2,13 +2,16 @@ defmodule CoverMyElixir.Tests.Accounts.UserApi do
   use ExUnit.Case
   import Mock
 
+  alias CoverMyElixir.Accounts.UserApi
+  alias CoverMyElixir.Stubs.Accounts.UserApi.Users
+
   test "can call the api and get back something with " do
-    stub = CoverMyElixir.Stubs.Accounts.UserApi.Users.all() |> Poison.encode!()
+    stub = Users.all() |> Poison.encode!()
     mock_response = {:ok, %HTTPoison.Response{status_code: 200, body: stub}}
 
     with_mock HTTPoison, get: fn _url -> mock_response end do
       # make sure we get :ok
-      assert {:ok, users} = CoverMyElixir.Accounts.UserApi.all()
+      assert {:ok, users} = UserApi.all()
 
       # check the keys of each item to make sure the are what we expect
       keys = fn list ->
