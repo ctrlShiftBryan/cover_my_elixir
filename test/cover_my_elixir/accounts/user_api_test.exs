@@ -4,10 +4,10 @@ defmodule CoverMyElixir.Tests.Accounts.UserApi do
 
   alias CoverMyElixir.Accounts.UserApi
   alias CoverMyElixir.Stubs.Accounts.UserApi.Users
+  alias HTTPoison.Response
 
   test "can call the api and get back something with " do
-    stub = Users.all() |> Poison.encode!()
-    mock_response = {:ok, %HTTPoison.Response{status_code: 200, body: stub}}
+    mock_response = {:ok, %{status_code: 200, body: Users.all() |> Poison.encode!()}}
 
     with_mock HTTPoison, get: fn _url -> mock_response end do
       # make sure we get :ok
